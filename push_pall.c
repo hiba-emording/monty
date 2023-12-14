@@ -60,6 +60,13 @@ void _push(stack_t **head, unsigned int line_number)
 
 		}
 	}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fclose(carrier_s.file);
+		free(carrier_s.content);
+		exit(EXIT_FAILURE);
+	}
 
 	value = atoi(arg);
 	add_node(head, value);
