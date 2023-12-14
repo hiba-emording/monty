@@ -7,29 +7,24 @@
 
 void reader(FILE *file)
 {
-char *content = NULL;
-size_t size = 0;
-ssize_t read_line = 1;
-unsigned int line_number = 0;
+	size_t size = 0;
+	char *content = NULL;
+	unsigned int line_number = 1;
 
-	while (read_line > 0)
+	while (getline(&content, &size, file) != -1)
 	{
-		content = NULL;
-		read_line = getline(&content, &size, file);
 		carrier_s.content = content;
+		parser(carrier_s.content, line_number);
 		line_number++;
-
-		if (read_line > 0)
-		{
-			parser(content, line_number);
-		}
-		free(content);
 	}
+
+	free(content);
 }
 
 /**
  * parser - Tokenize a command
  * @content: Command string to be tokenized
+ * @line_number: number of line in file
  */
 
 void parser(char *content, unsigned int line_number)
@@ -39,15 +34,9 @@ char *token;
 	token = strtok(content, " \n\t$");
 
 	if (token == NULL)
-	{
 		return;
-	}
 
 	carrier_s.arg = strtok(NULL, " \n\t$");
-
-	/* TEST */
-	printf("Command: %s\n", token);
-	printf("Argument: %s\n", carrier_s.arg);
 
 	executor(token, line_number);
 }
@@ -55,40 +44,25 @@ char *token;
 /**
  * executor - Executes command
  * @command: Tokenized command to be executed
+ * @line_number: number of line in file
  */
 
 void executor(char *command, unsigned int line_number)
 {
-int i;
-stack_t *arg_stack = (stack_t *)carrier_s.arg;
-stack_t *temp;
+	int i;
 
-instruction_t instructions[] = {
-	{"push", _push},
-	{"pall", _pall},
-	{"pint", _pint},
-	{"nop", _nop},
-	{NULL, NULL}
-};
-
-/* Test */
-
-printf("Line Number: %u\n", line_number);
-
-temp = arg_stack;
-printf("Argument Stack: ");
-while (temp != NULL)
-{
-printf("%d ", temp->n);
-temp = temp->next;
-}
-printf("\n");
+	instruction_t instructions[] = {
+		{"push", _push},
+		{"pall", _pall},
+		{"pint", _pint},
+		{NULL, NULL}
+	};
 
 	for (i = 0; instructions[i].opcode != NULL; i++)
 	{
 		if (strcmp(command, instructions[i].opcode) == 0)
 		{
-			instructions[i].f(&arg_stack, line_number);
+			instructions[i].f(&(carrier_s.head), line_number);
 			return;
 		}
 	}

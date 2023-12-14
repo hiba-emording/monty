@@ -8,9 +8,11 @@
 
 void add_node(stack_t **head, int value)
 {
-stack_t *new, *curr, *temp;
-curr = *head;
-new = malloc(sizeof(stack_t));
+	stack_t *new, *curr;
+
+	curr = *head;
+
+	new = malloc(sizeof(stack_t));
 
 	if (new == NULL)
 	{
@@ -27,17 +29,6 @@ new = malloc(sizeof(stack_t));
 	new->next = *head;
 	new->prev = NULL;
 	*head = new;
-
-/* TEST */
-printf("Node added with value: %d\n", value);
-printf("Stack after adding node %d: ", value);
-temp = *head;
-while (temp != NULL)
-{
-printf("%d ", temp->n);
-temp = temp->next;
-}
-printf("\n");
 }
 
 /**
@@ -48,43 +39,30 @@ printf("\n");
 
 void _push(stack_t **head, unsigned int line_number)
 {
-int value, i = 0, is_valid = 0;
-char *arg = carrier_s.arg;
+	int value, i = 0;
+	char *arg = carrier_s.arg;
 
-        if (arg != NULL)
-        {
-                if (arg[i] == '-')
-                {
-                        i++;
-                }
+	if (arg != NULL)
+	{
+		for (; arg[i] != '\0'; i++)
+		{
+			if (isdigit(arg[i]) || arg[i] == '-')
+			{
+				continue;
+			}
+			else
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				fclose(carrier_s.file);
+				free(carrier_s.content);
+				exit(EXIT_FAILURE);
+			}
 
-                for (; arg[i] != '\0'; i++)
-                {
-                        if (isdigit(arg[i]))
-                        {
-                                is_valid = 1;
-                        }
-                }
-                if (is_valid == 0)
-                {
-                        fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                        fclose(carrier_s.file);
-                        free(carrier_s.content);
-                        exit(EXIT_FAILURE);
-                }
-        }
-        else
-        {
-                fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                fclose(carrier_s.file);
-                free(carrier_s.content);
-                exit(EXIT_FAILURE);
-        }
+		}
+	}
 
-        value = atoi(arg);
-	printf("Value passed to _push: %d\n", value);
-
-        add_node(head, value);
+	value = atoi(arg);
+	add_node(head, value);
 }
 
 
@@ -96,10 +74,10 @@ char *arg = carrier_s.arg;
 
 void _pall(stack_t **head, unsigned int line_number)
 {
-stack_t *curr;
-(void)line_number;
+	stack_t *curr;
+	(void)line_number;
 
-curr = *head;
+	curr = *head;
 
 	if (curr == NULL)
 	{
@@ -112,3 +90,4 @@ curr = *head;
 		curr = curr->next;
 	}
 }
+

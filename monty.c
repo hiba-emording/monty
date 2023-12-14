@@ -1,6 +1,6 @@
 #include "monty.h"
 
-carrier_t carrier_s = {NULL, NULL, NULL, 0};
+carrier_t carrier_s = {0, NULL, NULL, NULL, NULL};
 
 /**
  * main - Entry point to the Monty interpreter
@@ -11,8 +11,6 @@ carrier_t carrier_s = {NULL, NULL, NULL, 0};
 
 int main(int argc, char *argv[])
 {
-FILE *file;
-stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -20,17 +18,16 @@ stack_t *stack = NULL;
 		exit(EXIT_FAILURE);
 	}
 
-	file = fopen(argv[1], "r");
-	carrier_s.file = file;
+	carrier_s.file = fopen(argv[1], "r");
 
-	if (!file)
+	if (!carrier_s.file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
-	reader(file);
-	free_stack(stack);
-	fclose(file);
+	reader(carrier_s.file);
+	free_stack(carrier_s.head);
+	fclose(carrier_s.file);
 	return (EXIT_SUCCESS);
 }

@@ -12,22 +12,6 @@
 
 
 /**
- * struct carrier_s - structure for holding carrier data
- * @arg: pointer representing a value
- * @file: pointer for file handling
- * @content: pointer representing command strings
- * @isQueue: int flag indicating queue mode (1) or non-queue mode (0)
- */
-
-typedef struct carrier_s
-{
-	char *arg;
-	FILE *file;
-	char *content;
-	int isQueue;
-} carrier_t;
-
-/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
@@ -56,6 +40,25 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+
+/**
+ * struct carrier_s - structure for holding carrier data
+ * @arg: pointer representing a value
+ * @file: pointer for file handling
+ * @content: pointer representing command strings
+ * @isQueue: int flag indicating queue mode (1) or non-queue mode (0)
+ * @head: head of stack
+ */
+
+typedef struct carrier_s
+{
+	int isQueue;
+	char *content;
+	char *arg;
+	FILE *file;
+	stack_t *head;
+} carrier_t;
 
 /* GLOBAL VAR */
 
