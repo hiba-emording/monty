@@ -55,6 +55,8 @@ void executor(char *command, unsigned int line_number)
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
+		{"pop", _pop},
+		{"nop", _nop},
 		{NULL, NULL}
 	};
 
