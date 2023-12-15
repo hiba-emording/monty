@@ -92,8 +92,12 @@ void _pstr(stack_t **head, unsigned int line_number);
 void _rotl(stack_t **head, unsigned int line_number);
 void _rotr(stack_t **head, unsigned int line_number);
 
+void _stack(stack_t **head, unsigned int line_number);
+void _queue(stack_t **head, unsigned int line_number);
+
 /* HELPER FUNCTIONS */
 
 void add_node(stack_t **head, int value);
+void add_node_t(stack_t **head, int value);
 
 #endif

@@ -32,6 +32,42 @@ void add_node(stack_t **head, int value)
 }
 
 /**
+ * add_node_t - Adds a new node to the tail of stack
+ * @head: Pointer to the head of the stack
+ * @value: Value to be stored in the new node
+ */
+
+void add_node_t(stack_t **head, int value)
+{
+	stack_t *new, *curr;
+
+	new = malloc(sizeof(stack_t));
+
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	new->n = value;
+	new->next = NULL;
+
+	if (*head == NULL)
+	{
+		new->prev = NULL;
+		*head = new;
+		return;
+	}
+	curr = *head;
+
+	while (curr->next != NULL)
+	{
+		curr = curr->next;
+	}
+	curr->next = new;
+	new->prev = curr;
+}
+
+/**
  * _push - Pushes a value to stack
  * @head: Pointer to the head of stack
  * @line_number: Line number in the file
@@ -69,7 +105,15 @@ void _push(stack_t **head, unsigned int line_number)
 	}
 
 	value = atoi(arg);
-	add_node(head, value);
+
+	if (carrier_s.isQueue == 0)
+	{
+		add_node(head, value);
+	}
+	else
+	{
+		add_node_t(head, value);
+	}
 }
 
 
