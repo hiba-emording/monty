@@ -52,7 +52,7 @@ void _push(stack_t **head, unsigned int line_number)
 			}
 			else
 			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				fprintf(stderr, "L%u: usage: push integer\n", line_number);
 				fclose(carrier_s.file);
 				free(carrier_s.content);
 				exit(EXIT_FAILURE);
@@ -62,7 +62,7 @@ void _push(stack_t **head, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		fclose(carrier_s.file);
 		free(carrier_s.content);
 		exit(EXIT_FAILURE);
