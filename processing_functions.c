@@ -60,6 +60,8 @@ void executor(char *command, unsigned int line_number)
 		{"add", _add},
 		{"sub", _sub},
 		{"nop", _nop},
+		{"rotl", _rotl},
+		{"rotr", _rotr},
 		{NULL, NULL}
 	};
 
