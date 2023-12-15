@@ -33,7 +33,7 @@ char *token;
 
 	token = strtok(content, " \n\t$");
 
-	if (token == NULL)
+	if (token == NULL || token == '#')
 		return;
 
 	carrier_s.arg = strtok(NULL, " \n\t$");
