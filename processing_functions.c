@@ -35,7 +35,7 @@ char *token;
 
 	if (token == NULL || token[0] == '#')
 		return;
-	
+
 	carrier_s.arg = strtok(NULL, " \n\t$");
 
 	executor(token, line_number);
