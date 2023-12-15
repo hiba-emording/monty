@@ -33,10 +33,9 @@ char *token;
 
 	token = strtok(content, " \n\t$");
 
-	if (token == NULL || token == '#')
-	{
+	if (token == NULL || token[0] == '#')
 		return;
-	}
+	
 	carrier_s.arg = strtok(NULL, " \n\t$");
 
 	executor(token, line_number);
