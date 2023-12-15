@@ -16,7 +16,7 @@ void add_node(stack_t **head, int value)
 
 	if (new == NULL)
 	{
-		fprintf(stderr, "Error: Unable to allocate memory for a new node\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
