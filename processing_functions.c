@@ -63,6 +63,8 @@ void executor(char *command, unsigned int line_number)
 		{"div", _div},
 		{"mod", _mod},
 		{"nop", _nop},
+		{"pchar", _pchar},
+		{"pstr", _pstr},
 		{"rotl", _rotl},
 		{"rotr", _rotr},
 		{NULL, NULL}
