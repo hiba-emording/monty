@@ -58,6 +58,7 @@ void executor(char *command, unsigned int line_number)
 		{"pop", _pop},
 		{"swap", _swap},
 		{"add", _add},
+		{"sub", _sub},
 		{"nop", _nop},
 		{NULL, NULL}
 	};
