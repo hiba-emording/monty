@@ -79,7 +79,7 @@ void executor(char *command, unsigned int line_number)
 		}
 	}
 
-	fprintf(stderr, "Unknown instruction: %s\n", command);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
 	fclose(carrier_s.file);
 	free(carrier_s.content);
 	exit(EXIT_FAILURE);
