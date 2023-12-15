@@ -31,12 +31,12 @@ void parser(char *content, unsigned int line_number)
 {
 char *token;
 
-	token = strtok(content, " \n\t$");
+	token = strtok(content, " \n\t");
 
 	if (token == NULL || token[0] == '#')
 		return;
 
-	carrier_s.arg = strtok(NULL, " \n\t$");
+	carrier_s.arg = strtok(NULL, " \n\t");
 
 	executor(token, line_number);
 }
